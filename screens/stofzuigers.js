@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Stylesheet, Text, View, Image, TextInput, Pressable, FlatList} from 'react-native';
 
 
-const stofzuigers = ({naviation}) =>{
+const stofzuigers = ({navigation}) =>{
 
     const [stofzuigers, setStofzuigers] = useState ([]);
 
