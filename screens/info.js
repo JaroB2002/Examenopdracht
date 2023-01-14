@@ -1,71 +1,31 @@
-/*import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, {useState, useEffect} from 'react';
-import {Stylesheet, Text, View, Image, TextInput, Pressable, FlatList} from 'react-native';
-*/
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Image, TextInput, Pressable, FlatList, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Image, TextInput, Pressable, FlatList, Vibration} from 'react-native';
 
-const meubels = ({navigation}) =>{
+import Details from '../components/Details';
+
+const Info = ({navigation, route}) =>{
 
     return (
         <View>
-           <Text>
-<p>Dit is wat tekst</p>
-           </Text>
+          <Details 
+            itemTitle={route.params.itemTitle}  
+            itemDescription={route.params.itemDescription} 
+            itemImage={route.params.itemImage}
+          />
+          <Image style={styles.image} source={{uri:route.params.image}} />
         </View>
     )
 }
-
-
-
-const Stack = createNativeStackNavigator();
-
-const info = ({route, navigation}) =>{
-
-    return (
-        <View>
-          <Text>
-            {route.params.title} 
-
-
-          </Text>
-
-          <Image style={styles.image} source={{uri:route.params.image}} />
-
-          {/* <ScrollView>
-              <Image
-                style={styles.filmPoster}
-                source={{
-                  uri: info.banner,
-                }}
-              />
-              <Text style={styles.title}>{info.title}</Text>
-              <View style={styles.details}>
-                  <Text>{info.plot}</Text>
-                  <Text style={styles.release}>release: {info.release}</Text>
-              </View>
-
-              </ScrollView> */}
-        </View>
-    );
-
-
-}
-
-
-/* Gedeelte vd film genomen*/
 const styles = StyleSheet.create({
-  image:{
+  /*image:{
     width: 180,
     height: 180,
-},
+},*//*
     title: {
       margin: 16,
-      fontSize: 24,
+      fontSize: '20px',
       textAlign: 'center',
     },
     details: {
@@ -79,11 +39,23 @@ const styles = StyleSheet.create({
     },
     release: {
       fontStyle: 'italic',
-      fontSize: 12,
+      fontSize: '20px',
       marginTop: 8,
       textAlign: 'right',
     },
+    StyleSheet: {
+      fontFamily: "Acme-Regular"
+    },
+    StyleSheet: {
+      fontFamily: "Acme-Regular"
+    }*/
+    Info:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 300,
+  },
+
 
   });
 
-export default info;
+export default Info;
