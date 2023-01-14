@@ -1,76 +1,52 @@
-/*import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View , FlatList, Pressable} from 'react-native';
-import React, {useState, useEffect} from 'react';
-
-
-export default function App() {
-  const [plants, setPlants] = useState ([]);
-
-    const getPlants = async () => {
-        try {
-            const response = await fetch ("http://jarobrichau.be/wp-json/wp/v2/posts?categories=6", {
-
-            })
-            const json = await response.json();
-            console.log(json)
-            setPlants(json);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        getPlants();
-    }, []);
-  return (
-    <View>
-    <FlatList data={plants} renderItem={({item})=>(
-        <Text>
-            <Text>{item.title.rendered}</Text>
-            <Pressable>Verder</Pressable>
-        </Text>
-      )}
-
- />
-</View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-*/
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableNativeFeedback, ToastAndroid  } from 'react-native';
 
-import meubels from './screens/AllStofzuigerSreen';
+//import { WebViewLeaf } from 'react-native-webview-leaf';
 
+import Stofzuigers from './screens/stofzuigers.js';
+import Info from './screens/info.js';
+import Winkelcartscreen from './screens/winkelcart.js';
+import AlgemeneVoorwaarden from './screens/algemenevoorwaarden.js';
 
 const Stack = createNativeStackNavigator();
-
+// function showToast() {
+//   ToastAndroid.show('Request sent successfully!', ToastAndroid.SHORT);
+// }
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Trendy meubels" component={(meubels)} />
+        <Stack.Screen name="Stofzuigers" component={(Stofzuigers)} />
+        <Stack.Screen name="Info" component={(Info)} />
+        <Stack.Screen name="Winkelmand" component={(Winkelcartscreen)} />
+        <Stack.Screen name="Algemene Voorwaarden" component={(AlgemeneVoorwaarden)} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  /*container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: StatusBar.currentHeight,
+    backgroundColor: '#6638f0',
+    padding: 8,
+  },*/
+
+  welcome: {
+    fontSize: 20,
+    textAlign: "center",
+    margin: 10,
+    fontFamily: "SFUIDisplay-Bold"
   },
+  instructions: {
+    textAlign: "center",
+    color: "#333333",
+    marginBottom: 5,
+    fontFamily: "SFUIDisplay-Semibold"
+  }
 });
