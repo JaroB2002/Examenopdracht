@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, FlatList, Image} from 'react-native';
 
 
 function Details(props){
@@ -12,6 +12,28 @@ function Details(props){
                 <Text style={styles.itemDescription}>
                     {props.itemDescription}
                 </Text>
+
+
+                <FlatList style={{height:610}} renderItem={({item}) => (
+                <View>
+                    <Text>{item.title.rendered}</Text>
+                    <View>
+                            {item.yoast_head_json?.og_image !== undefined && 
+                                <Image
+                                    style={{ width:200, height:300}}
+                                    resizeMode="contain"
+                                    source={{ uri: `${item.yoast_head_json.og_image[0].url}` }}
+                                />
+                            }
+                        </View>
+                        <View style={{
+                            borderBottomColor: '#f2f2f2',
+                            borderBottomWidth: 2,
+                        }}/> 
+                </View>
+                
+            )}/>
+
             </View>
         </>
     )
@@ -20,8 +42,8 @@ function Details(props){
 const styles = StyleSheet.create({
    
     background:{
-        backgroundColor:"#555354",
-        paddingBottom: 30000,
+        backgroundColor:"#555555",
+        paddingBottom: 300,
     },
     title:{
         color:"#98DD98",
@@ -35,18 +57,8 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         margin:18
     },
-    Details: {
-        fontFamily: "Acme-Regular"
-      },
-      Details: {
-        fontFamily: "Acme-Regular"
-      }
-     /* itemDescription: {
-        fontFamily: "Acme-Regular"
-      },
-      itemDescription: {
-        fontFamily: "Acme-Regular"
-      }*/
+
+
     
 });
 
