@@ -1,7 +1,8 @@
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import {StyleSheet, Text, View, Image, TextInput, Pressable, FlatList, Vibration} from 'react-native';
 
+  
 const Stofzuigers = ({navigation}) =>{
 
     const [stofzuigers, setStofzuigers] = useState ([]);
@@ -18,6 +19,7 @@ const Stofzuigers = ({navigation}) =>{
         }
     }
     const pattern= [
+        // voor de vibratie bij winkelmand
         0,
         200,
         400,
@@ -32,7 +34,7 @@ const Stofzuigers = ({navigation}) =>{
 
     const getStofzuigerByTitleSearch = async (enteredText) => {//argument meegegeven door onChangeText
         try {
-            if (enteredText.length > 3) {
+            if (enteredText.length > 5) { //tekst boven 5, wordt er gezocht
                 const search = encodeURI("https://jarobrichau.be/wp-json/wp/v2/posts?slug=" + enteredText + "/");
                 console.log(search);
                 const response = await fetch(search);
@@ -71,7 +73,7 @@ const Stofzuigers = ({navigation}) =>{
                         <View>
                             {item.yoast_head_json?.og_image !== undefined && 
                                 <Image
-                                    style={{ width:250, height:350}}
+                                    style={{ width:250, height:350}} //image opmaak (length & width)
                                     resizeMode="contain"
                                     source={{ uri: `${item.yoast_head_json.og_image[0].url}` }}
                                 />
@@ -81,8 +83,8 @@ const Stofzuigers = ({navigation}) =>{
                     </View>
                     
                     <View style={Styles.subContainer}>
-                        <Pressable onPress={() => setCart([...cart, item])}>
-                            <Text style={Styles.add}> Toevoegen aan winkelmand</Text>
+                        <Pressable onPress={() => setCart([...cart, item])}> 
+                            <Text style={Styles.add}> Toevoegen aan winkelmand</Text> 
                         </Pressable>
                         <Pressable 
                             style={Styles.br} 
@@ -91,24 +93,24 @@ const Stofzuigers = ({navigation}) =>{
                                     itemTitle: item.title.rendered, 
                                     itemDescription: item.yoast_head_json.description, 
                                     itemImage: item.yoast_head_json.og_image[0].url  
-                                });
+                                }); /*description erbij op info*/
                             }}>
-                            <Text style={Styles.ExtraInfo}>Extra info</Text>
-                        </Pressable>
+                            <Text style={Styles.ExtraInfo}>Extra info</Text>  
+                        </Pressable> 
                     </View>
                     
                     <View style={{
                         borderBottomColor: '#f2f2f2',
-                        borderBottomWidth: 2,
+                        borderBottomWidth: 2, // lijntje ertussen
                     }}
                     />   
                 </View>
             )}/>
             <Pressable 
-                style={Styles.br} 
+                style={Styles.br} // navigeren naar algemene voorwaarden
                 onPress ={() => { navigation.navigate ("Algemene Voorwaarden");}}>
-                <Text style={Styles.ExtraInfo}>Algemene Voorwaarden</Text>
-            </Pressable>
+                <Text style={Styles.ExtraInfo}>Algemene Voorwaarden</Text> 
+            </Pressable> 
         </View>
     )
 }
@@ -152,9 +154,13 @@ const Styles = StyleSheet.create({
     },
     StofTitle:{
         color:"#90EE90",
-        paddingTop: 20,
+        paddingTop: 1,
         fontSize:25,
-        fontWeight:'700'
+        fontWeight:'900',
+        textAlign: "center",
+        color: "#333333",
+        marginBottom: 5,
+        fontFamily: "Acme-Regular",
     },
     
     br:{
@@ -164,8 +170,8 @@ const Styles = StyleSheet.create({
     },
     ExtraInfo:{
         backgroundColor:"black", 
-        paddingHorizontal:25,
-        paddingVertical:8,
+        paddingHorizontal:20,
+        paddingVertical:6,
         textAlign: 'center',
         fontWeight:'700',
         color: "white",
@@ -175,34 +181,22 @@ const Styles = StyleSheet.create({
         backgroundColor:"#90EE90",
         width: 200, 
         paddingHorizontal:5,
-        paddingVertical:8,
+        paddingVertical:6,
         textAlign: 'center',
         fontWeight:'700',
         color: "white",
-        borderRadius: 20
+        borderRadius: 30
     },
 
     input:{
         backgroundColor:"#CCCCFF", //perwinkle zoek*/
-        padding: 10,
-        margin: 30,
+        padding: 8,
+        margin: 20,
         borderRadius: 10,
         color:"white",
         
     },
 
-    p:{
-        color:"black",
-    },
-    screen: {
-        fontFamily: "Acme-Regular"
-      },
-      screen: {
-        fontFamily: "Acme-Regular"
-      }
-    
-
 })
     
-
 export default Stofzuigers;
